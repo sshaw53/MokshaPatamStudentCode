@@ -26,9 +26,10 @@ public class MokshaPatam {
             if (boardsize - i > 2 && boardsize - i < 12) {
                 return moves + 1;
             }
-            // EDGE CASE - 1 SPACE LEFT --> add 2 moves (can we automatically assume that though)
+            // ?: EDGE CASE - 1 SPACE LEFT --> add 2 moves (can we automatically assume that though)
             // Check if there's a ladder btwn i and i + 12 (including i + 12)
             if (ladders[i][0] > i && ladders[i][0] <= i + 12) {
+                // ?: what if there's a ladder at i + 1 but we can't roll to it?
                 // If yes, check if the # at the end of the ladder (how to find that ?) is > i + 24
                 if (ladders[i][1] > i + 24) {
                     // If yes, set i = end of ladder #, moves += 1, break out of if-statement loops to continue to while loop by setting
