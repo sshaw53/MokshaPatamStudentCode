@@ -28,6 +28,7 @@ public class MokshaPatam {
             }
             // ?: EDGE CASE - 1 SPACE LEFT --> add 2 moves (can we automatically assume that though)
             // Check if there's a ladder btwn i and i + 12 (including i + 12)
+            // ?: could be mult ladders
             if (ladders[i][0] > i && ladders[i][0] <= i + 12) {
                 // ?: what if there's a ladder at i + 1 but we can't roll to it?
                 // If yes, check if the # at the end of the ladder (how to find that ?) is > i + 24
@@ -51,8 +52,10 @@ public class MokshaPatam {
                 moves += 1;
             }
         }
-
         // Does this use recursion??
+        // base case: being one roll away from board_size
+        // what's easiest / shortest to get between board_size and board_size-12 - for each value
+        //
         return 0;
     }
 }
