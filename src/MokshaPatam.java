@@ -20,18 +20,38 @@ public class MokshaPatam {
         int board_side = (int) Math.sqrt(boardsize);
         int i = 1;
         int moves = 0;
+        boolean cont = true;
         while (i < boardsize + 1) {
-            // check if there's a ladder btwn i and i + 12 (including i + 12)
-                // if yes, check if the # at the end of the ladder (how to find that ?) is > i + 24
-                    // if yes, set i = end of ladder #, moves += 1, break out of if-statement loops to continue to while loop
-
-            // if hasn't exited the loop, check if there's a snake at i + 12
-                // if snake, check i + 11 & continue down until no snake
-                    // set i = i + highest value w/o snake
+            cont = true;
+            if (boardsize - i > 2 && boardsize - i < 12) {
+                return moves + 1;
+            }
+            // EDGE CASE - 1 SPACE LEFT --> add 2 moves (can we automatically assume that though)
+            // Check if there's a ladder btwn i and i + 12 (including i + 12)
+            if (ladders[i][0] > i && ladders[i][0] <= i + 12) {
+                // If yes, check if the # at the end of the ladder (how to find that ?) is > i + 24
+                if (ladders[i][1] > i + 24) {
+                    // If yes, set i = end of ladder #, moves += 1, break out of if-statement loops to continue to while loop by setting
+                    // cont to false
+                    i = ladders[i][1];
+                    moves += 1;
+                    cont = false;
+                }
+            }
+            // If cont is true, check if there's a snake at i + 12
+            // If snake, check i + 11 & continue down until no snake
+            if (cont) {
+                int place = i + 12;
+                while (snakes[i][0] == place) {
+                    place -= 1;
+                }
+                // Set i = i + highest value w/o snake
+                i = place;
+                moves += 1;
+            }
         }
 
-
-        // does this use recursion??
+        // Does this use recursion??
         return 0;
     }
 }
