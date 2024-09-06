@@ -39,9 +39,9 @@ public class MokshaPatam {
         while (!queue.isEmpty()) {
             // Remove it from the current queue and add it to the visited array
             current = queue.remove();
-            visited[current] = true;
             // If we've reached the end of the board, return the number of rolls
-            if (current >= boardsize - 6) { return rolls[current]; }
+            if (current == boardsize) { return rolls[current]; }
+            if (current >= boardsize - 6) { return rolls[current] + 1; }
             // Finding the possible future moves
             for (int i = 1; i < 7; i++) {
                 node = current + i;
@@ -53,6 +53,7 @@ public class MokshaPatam {
                 if (!visited[node]) {
                     rolls[node] = rolls[current] + 1;
                     queue.add(node);
+                    visited[node] = true;
                 }
             }
         }
