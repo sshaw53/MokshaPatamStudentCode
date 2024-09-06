@@ -37,7 +37,7 @@ public class MokshaPatam {
         queue.add(1);
         // While there are still nodes left in the queue
         while (!queue.isEmpty()) {
-            // Remove it from the current queue and add it to the visited array
+            // Remove it from the current queue
             current = queue.remove();
             // If we've reached the end of the board, return the number of rolls
             if (current == boardsize) { return rolls[current]; }
@@ -49,7 +49,7 @@ public class MokshaPatam {
                 if (snake_ladder[node] != 0) {
                     node = snake_ladder[node];
                 }
-                // If the node hasn't been visited, add it to the back of the queue and save roll #
+                // If the node hasn't been visited, add it to the back of the queue and save roll # (and mark as visited)
                 if (!visited[node]) {
                     rolls[node] = rolls[current] + 1;
                     queue.add(node);
